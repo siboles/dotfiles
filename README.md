@@ -16,7 +16,7 @@ You can delete the lines that exec these in .config/i3/config.
 
 #### Dirty
 
-![image](df_screeshots/dirty.png)
+![image](df_screenshots/dirty.png)
 
 ## Dependencies
 * [i3-gaps](https://github.com/Airblader/i3) This fork of i3 may be available in your distribution's repository. If you want to just use i3wm remove/comment the blocked section i3-gaps options .config/i3/config.
