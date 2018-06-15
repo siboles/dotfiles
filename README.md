@@ -8,6 +8,16 @@ These are the dotfiles pertinent to my system configuration and workflow. I star
 
 You can delete the lines that exec these in .config/i3/config.
 
+## Screenshots
+
+#### Clean
+
+![image](df_screenshots/clean.png)
+
+#### Dirty
+
+![image](df_screeshots/dirty.png)
+
 ## Dependencies
 * [i3-gaps](https://github.com/Airblader/i3) This fork of i3 may be available in your distribution's repository. If you want to just use i3wm remove/comment the blocked section i3-gaps options .config/i3/config.
 * [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) If you are using another shell i.e. BASH then you don't need this. 
