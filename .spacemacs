@@ -322,6 +322,9 @@ you should place your code here."
   (setq-default dotspacemacs-configuration-layers
                 '((auto-completion :variables
                      auto-completion-enable-snippets-in-popup t)))
+  (require 'server)
+  (unless (server-running-p)
+    (server-start))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will

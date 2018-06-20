@@ -4,8 +4,8 @@ export PATH=$PATH:$HOME/anaconda3/bin
 #--------------------------------------------------------------------------------
 # ENVIRONMENT VARIABLES
 export MATLAB_JAVA="/usr/lib/jvm/java-7-openjdk/jre"
-export EDITOR="emacs"
-export GIT_EDITOR="emacs"
+export EDITOR="emacs -c"
+export GIT_EDITOR="emacs -c"
 export BROWSER="firefox"
 export ZSH=$HOME/.oh-my-zsh
 
