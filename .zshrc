@@ -1,26 +1,39 @@
-bindkey -v
-export KEYTIMEOUT=1
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# Path to your oh-my-zsh installation.
+ZSH=/usr/share/oh-my-zsh/
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster"
-source $ZSH/oh-my-zsh.sh
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -41,34 +54,24 @@ source $ZSH/oh-my-zsh.sh
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git
-	 vi-mode)
+plugins=(git)
 
-#source $ZSH/oh-my-zsh.sh
-#
-## User configuration
-#
-## PYTHON VIRTUALENV
-#export WORKON_HOME=$HOME/anaconda2/envs
-#export TERMINFO=/usr/share/terminfo
-#
-##Additions to PATH
-#export PATH="/home/scott/anaconda2/bin":$PATH
-##--------------------------------------------------------------------------------
-## ENVIRONMENT VARIABLES
-#export EDITOR="emacs"
-#export GIT_EDITOR="emacs"
-#export BROWSER="firefox"
+
+# User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -85,9 +88,6 @@ plugins=(git
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -96,52 +96,32 @@ plugins=(git
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-#--------------------------------------------------------------------------------
-# ALIASES
-alias ls='ls --color --group-directories-first'
-alias lsf='ls --color=auto -l | grep ^[-1]'
-alias lsd='ls --color=auto -d */'
-alias activate='source ~/anaconda3/bin/activate'
-alias deactivate='source ~/anaconda3/bin/deactivate'
 
-#--------------------------------------------------------------------------------
+ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+  mkdir $ZSH_CACHE_DIR
+fi
 
-solve() {
-    calc="${@//p/+}"
-    calc="${calc//x/*}"
-    bc -l <<<"scale=10;$calc"
-}
+source $ZSH/oh-my-zsh.sh
 
-sizeof() {  
-    if [[ -d $1 ]]; then
-        dirsize $1
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/scott/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/scott/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/scott/miniconda3/etc/profile.d/conda.sh"
     else
-        filesize $1
+        export PATH="/home/scott/miniconda3/bin:$PATH"
     fi
-}
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
-filesize() {  
-    ls -lah $1 | awk '{print $5}'
-}
-
-dirsize() {  
-    du -sh $1 | awk '{print $1}'
-}
-
-function emacs {
-    if [[ $# -eq 0 ]]; then
-        /usr/bin/emacs # "emacs" is function, will cause recursion
-        return
-    fi
-    args=($*)
-    for ((i=0; i <= ${#args}; i++)); do
-        local a=${args[i]}
-        # NOTE: -c for creating new frame
-        if [[ ${a:0:1} == '-' && ${a} != '-c' ]]; then
-            /usr/bin/emacs ${args[*]}
-            return
-        fi
-    done
-    setsid emacsclient -n -a /usr/bin/emacs ${args[*]}
-}

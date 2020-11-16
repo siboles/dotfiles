@@ -10,7 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 
-for_window[class="^.*"] border pixel 3
+for_window[class="^.*"] border pixel 4
 
 set $mod Mod4
 #workspace_layout tabbed
@@ -31,24 +31,26 @@ assign [class="Thunderbird"] 8
 exec --no-startup-id redshift
 exec --no-startup-id thunderbird
 exec --no-startup-id pidgin
-exec --no-startup-id feh --bg-fill $HOME/Pictures/wallpapers/sunset.png &
+exec --no-startup-id feh --bg-fill $HOME/Pictures/wallpapers/83-Uy3wwCH.jpg &
 exec --no-startup-id dropbox-cli start &
 
-exec --no-startup-id compton --config $HOME/.config/compton.conf
-
+#exec --no-startup-id picom 
+#
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:monospace 8
 #font ter-powerline-x18n:monospace 8
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Source Code Pro for Powerline 10
+#font pango:Source Code Pro for Powerline 10
+font ttf-hack 10
 
 new_window pixel 0
-default_border pixel 3
+default_border pixel 4
 
 ###################
-# i3-gaps options
+
+# i3-gaps options 
 gaps inner 5
 gaps outer 5
 
@@ -58,7 +60,6 @@ smart_gaps on
 
 for_window[class="Steam"] floating enable, border none
 for_window[class="Thunderbird"] floating_minimum_size 1024 x 576, floating_maximum_size 1024 x 576
-for_window[class="kitty"] floating_minimum_size 1024 x 576, floating_maximum_size 1024 x 576
 
 #audio controls
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 1dB+ unmute
@@ -82,7 +83,7 @@ bindsym XF86AudioPrev exec playerctl previous
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id kitty 
+bindsym $mod+Return exec --no-startup-id tilix 
 
 # kill focused window
 bindsym $mod+Shift+q kill
